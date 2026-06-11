@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forgeline Construction Group — We Build What Lasts</title>
+<meta name="description" content="Forgeline Construction Group delivers commercial, residential, and industrial construction projects on time and on budget. Design-build, general contracting, and renovations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: #131312; color: #EDEBE6; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+:root {
+  --ink:    #131312;
+  --ink2:   #1C1C1A;
+  --ink3:   #262624;
+  --paper:  #EDEBE6;
+  --yellow: #F5C518;
+  --muted:  rgba(237,235,230,0.55);
+  --line:   rgba(237,235,230,0.12);
+  --display: 'Anton', sans-serif;
+  --body: 'Inter', sans-serif;
+}
+
+.display { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.01em; font-weight: 400; }
+
+/* hazard stripe */
+.stripe { height: 8px; background: repeating-linear-gradient(-45deg, var(--yellow) 0 18px, var(--ink) 18px 36px); }
+
+.label {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-transform: uppercase; letter-spacing: 0.22em; font-size: 11px; font-weight: 700;
+  color: var(--yellow); margin-bottom: 1.25rem;
+}
+.label::before { content: ''; width: 26px; height: 2px; background: var(--yellow); }
+
+.btn {
+  display: inline-block; font-family: var(--body);
+  text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; font-weight: 700;
+  padding: 16px 36px; transition: all 0.25s; cursor: pointer; border: none;
+}
+.btn--yellow { background: var(--yellow); color: var(--ink); }
+.btn--yellow:hover { background: #FFD83D; transform: translateY(-2px); }
+.btn--ghost { background: transparent; color: var(--paper); border: 1px solid rgba(237,235,230,0.3); }
+.btn--ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(19,19,18,0.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line); height: 72px;
+}
+.nav__inner { max-width: 1320px; margin: 0 auto; padding: 0 2rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav__logo { font-family: var(--display); font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--paper); }
+.nav__logo span { color: var(--yellow); }
+.nav__links { display: flex; gap: 2.25rem; }
+.nav__link { text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; font-weight: 600; color: var(--muted); transition: color 0.2s; }
+.nav__link:hover { color: var(--paper); }
+.nav__cta { font-size: 11px; padding: 11px 24px; }
+.nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav__burger span { display: block; width: 24px; height: 2px; background: var(--paper); }
+.nav__mobile { display: none; position: fixed; inset: 0; z-index: 200; background: var(--ink); flex-direction: column; padding: 6rem 2rem 3rem; }
+.nav__mobile.open { display: flex; }
+.nav__mobile-close { position: absolute; top: 1.25rem; right: 1.5rem; background: none; border: none; color: var(--paper); font-size: 30px; cursor: pointer; }
+.nav__mobile-link { font-family: var(--display); text-transform: uppercase; font-size: 32px; color: var(--paper); padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.nav__mobile-link span { color: var(--yellow); font-size: 14px; vertical-align: middle; margin-right: 12px; font-family: var(--body); font-weight: 700; }
+
+/* HERO */
+.hero { position: relative; min-height: 88vh; display: flex; align-items: flex-end; overflow: hidden; }
+.hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(19,19,18,0.45) 0%, rgba(19,19,18,0.25) 40%, rgba(19,19,18,0.92) 100%); }
+.hero__inner { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; width: 100%; padding: 8rem 2rem 4.5rem; }
+.hero__kicker { text-transform: uppercase; letter-spacing: 0.24em; font-size: 12px; font-weight: 700; color: var(--yellow); margin-bottom: 1rem; }
+.hero__h1 {
+  font-family: var(--display); text-transform: uppercase;
+  font-size: clamp(52px, 9vw, 132px); line-height: 0.96; letter-spacing: 0.005em;
+  color: var(--paper); max-width: 1000px; margin-bottom: 1.75rem;
+}
+.hero__h1 em { font-style: normal; color: var(--yellow); }
+.hero__sub { color: rgba(237,235,230,0.75); font-size: 1.05rem; max-width: 540px; margin-bottom: 2.25rem; }
+.hero__ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* STATS */
+.stats { background: var(--ink2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 3rem 2rem; }
+.stats__inner { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+.stat { border-left: 3px solid var(--yellow); padding-left: 1.5rem; }
+.stat__num { font-family: var(--display); font-size: clamp(40px,5vw,64px); line-height: 1; color: var(--paper); }
+.stat__lbl { text-transform: uppercase; letter-spacing: 0.16em; font-size: 10px; font-weight: 700; color: var(--muted); margin-top: 8px; }
+
+/* SERVICES */
+.services { background: var(--ink); padding: 6rem 2rem; }
+.wrap { max-width: 1320px; margin: 0 auto; }
+.section-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: end; margin-bottom: 3.5rem; }
+.section-h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(40px,5.4vw,76px); line-height: 1; color: var(--paper); }
+.section-h2 em { font-style: normal; color: var(--yellow); }
+.section-intro { color: var(--muted); font-size: 0.975rem; line-height: 1.75; }
+.services__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.svc { background: var(--ink); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
+.svc:hover { background: var(--ink3); }
+.svc::after { content: ''; position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--yellow); transition: width 0.35s; }
+.svc:hover::after { width: 100%; }
+.svc__num { font-family: var(--display); font-size: 15px; color: var(--yellow); margin-bottom: 1.25rem; }
+.svc__title { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; color: var(--paper); margin-bottom: 0.75rem; letter-spacing: 0.02em; }
+.svc__desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+/* PROJECTS */
+.projects { background: var(--ink2); padding: 6rem 2rem; }
+.projects__grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 1.25rem; }
+.proj { position: relative; overflow: hidden; cursor: pointer; }
+.proj--lg { grid-column: span 7; aspect-ratio: 16/10; }
+.proj--sm { grid-column: span 5; aspect-ratio: 16/10; }
+.proj__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+.proj:hover .proj__img { transform: scale(1.05); }
+.proj__overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.75rem; background: linear-gradient(180deg, transparent 45%, rgba(19,19,18,0.9) 100%);
+}
+.proj__tag { text-transform: uppercase; letter-spacing: 0.18em; font-size: 10px; font-weight: 700; color: var(--yellow); margin-bottom: 6px; }
+.proj__title { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; color: var(--paper); letter-spacing: 0.02em; }
+.proj__meta { font-size: 0.8rem; color: rgba(237,235,230,0.6); margin-top: 4px; }
+
+/* PROCESS */
+.process { background: var(--ink); padding: 6rem 2rem; }
+.process__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; border-top: 1px solid var(--line); padding-top: 3rem; }
+.step__num { font-family: var(--display); font-size: 56px; color: transparent; -webkit-text-stroke: 1.5px var(--yellow); line-height: 1; margin-bottom: 1.25rem; }
+.step__title { font-family: var(--display); text-transform: uppercase; font-size: 1.15rem; color: var(--paper); margin-bottom: 0.6rem; letter-spacing: 0.03em; }
+.step__desc { color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+
+/* WHY / SAFETY BAND */
+.band { position: relative; overflow: hidden; padding: 6rem 2rem; }
+.band__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.band__scrim { position: absolute; inset: 0; background: rgba(19,19,18,0.85); }
+.band__inner { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.band__h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(34px,4.4vw,60px); line-height: 1.02; color: var(--paper); }
+.band__h2 em { font-style: normal; color: var(--yellow); }
+.checks { display: flex; flex-direction: column; gap: 1.25rem; }
+.check { display: flex; gap: 1rem; align-items: flex-start; }
+.check__mark { flex: none; width: 26px; height: 26px; background: var(--yellow); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 2px; }
+.check__title { font-weight: 700; color: var(--paper); font-size: 0.975rem; }
+.check__desc { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+
+/* TESTIMONIALS */
+.testi { background: var(--ink2); padding: 6rem 2rem; }
+.testi__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.quote-card { background: var(--ink); border: 1px solid var(--line); padding: 2.25rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.quote-card__mark { font-family: var(--display); font-size: 44px; color: var(--yellow); line-height: 0.5; }
+.quote-card__text { color: rgba(237,235,230,0.8); font-size: 0.95rem; line-height: 1.75; flex: 1; }
+.quote-card__attr { text-transform: uppercase; letter-spacing: 0.14em; font-size: 10px; font-weight: 700; color: var(--muted); }
+.quote-card__attr strong { display: block; color: var(--paper); font-size: 12px; letter-spacing: 0.1em; margin-bottom: 2px; }
+
+/* CONTACT */
+.contact { background: var(--ink); padding: 6rem 2rem; }
+.contact__inner { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+.contact__h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(40px,5vw,72px); line-height: 1; color: var(--paper); margin-bottom: 1.5rem; }
+.contact__h2 em { font-style: normal; color: var(--yellow); }
+.contact__sub { color: var(--muted); max-width: 420px; margin-bottom: 2.5rem; }
+.contact__detail { margin-bottom: 1rem; }
+.contact__detail-lbl { text-transform: uppercase; letter-spacing: 0.16em; font-size: 10px; font-weight: 700; color: var(--muted); margin-bottom: 3px; }
+.contact__detail-val { font-family: var(--display); font-size: 1.4rem; color: var(--paper); letter-spacing: 0.02em; }
+.contact__detail-val:hover { color: var(--yellow); }
+
+.form { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.fg { display: flex; flex-direction: column; gap: 8px; }
+.fl { text-transform: uppercase; letter-spacing: 0.16em; font-size: 10px; font-weight: 700; color: var(--muted); }
+.fi {
+  width: 100%; background: var(--ink2); border: 1px solid var(--line);
+  padding: 14px 16px; font-family: var(--body); font-size: 0.95rem; color: var(--paper);
+  outline: none; transition: border-color 0.2s;
+}
+.fi:focus { border-color: var(--yellow); }
+.fi::placeholder { color: rgba(237,235,230,0.3); }
+select.fi { cursor: pointer; }
+textarea.fi { resize: none; min-height: 120px; }
+.form-submit {
+  background: var(--yellow); color: var(--ink);
+  text-transform: uppercase; letter-spacing: 0.16em; font-size: 12px; font-weight: 800;
+  padding: 18px; border: none; cursor: pointer; transition: all 0.25s;
+}
+.form-submit:hover { background: #FFD83D; transform: translateY(-2px); }
+.form-success { display: none; text-align: center; padding: 3rem 0; }
+.form-success__title { font-family: var(--display); text-transform: uppercase; font-size: 2rem; color: var(--yellow); margin-bottom: 0.5rem; }
+.form-success__sub { color: var(--muted); }
+
+/* FOOTER */
+footer { background: var(--ink2); border-top: 1px solid var(--line); padding: 3.5rem 2rem 2rem; }
+.footer__grid { max-width: 1320px; margin: 0 auto; display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+.footer__logo { font-family: var(--display); font-size: 24px; text-transform: uppercase; color: var(--paper); margin-bottom: 0.5rem; }
+.footer__logo span { color: var(--yellow); }
+.footer__tag { color: var(--muted); font-size: 0.85rem; max-width: 280px; }
+.footer__head { text-transform: uppercase; letter-spacing: 0.18em; font-size: 10px; font-weight: 700; color: var(--yellow); margin-bottom: 1rem; }
+.footer__lnk { display: block; color: var(--muted); font-size: 0.875rem; margin-bottom: 0.5rem; transition: color 0.2s; }
+.footer__lnk:hover { color: var(--paper); }
+.footer__bottom { max-width: 1320px; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer__copy { color: rgba(237,235,230,0.35); font-size: 0.8rem; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.2,0.6,0.2,1), transform 0.9s cubic-bezier(0.2,0.6,0.2,1); transition-delay: var(--rd, 0s); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }
+
+/* MOBILE */
+@media (max-width: 960px) {
+  .nav__links, .nav__cta { display: none; }
+  .nav__burger { display: flex; }
+  .hero__inner { padding: 6rem 1.5rem 3.5rem; }
+  .stats { padding: 2.5rem 1.5rem; }
+  .stats__inner { grid-template-columns: repeat(2,1fr); gap: 2rem 1.5rem; }
+  .services, .projects, .process, .testi, .contact, .band { padding: 4rem 1.5rem; }
+  .section-head { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+  .services__grid { grid-template-columns: 1fr; }
+  .projects__grid { grid-template-columns: 1fr; }
+  .proj--lg, .proj--sm { grid-column: span 1; aspect-ratio: 16/10; }
+  .process__grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+  .band__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .testi__grid { grid-template-columns: 1fr; }
+  .contact__inner { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { padding: 3rem 1.5rem 1.5rem; }
+}
+@media (max-width: 520px) {
+  .process__grid { grid-template-columns: 1fr; }
+  .stats__inner { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo">FORGE<span>LINE</span></a>
+    <div class="nav__links">
+      <a href="#services" class="nav__link">Services</a>
+      <a href="#projects" class="nav__link">Projects</a>
+      <a href="#process" class="nav__link">Process</a>
+      <a href="#about" class="nav__link">Why Us</a>
+      <a href="#contact" class="nav__link">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn--yellow nav__cta">Get a quote</a>
+    <button class="nav__burger" onclick="document.getElementById('mob').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mob" class="nav__mobile">
+  <button class="nav__mobile-close" onclick="document.getElementById('mob').classList.remove('open')">&times;</button>
+  <a href="#services" class="nav__mobile-link" onclick="document.getElementById('mob').classList.remove('open')"><span>01</span>Services</a>
+  <a href="#projects" class="nav__mobile-link" onclick="document.getElementById('mob').classList.remove('open')"><span>02</span>Projects</a>
+  <a href="#process" class="nav__mobile-link" onclick="document.getElementById('mob').classList.remove('open')"><span>03</span>Process</a>
+  <a href="#about" class="nav__mobile-link" onclick="document.getElementById('mob').classList.remove('open')"><span>04</span>Why Us</a>
+  <a href="#contact" class="nav__mobile-link" onclick="document.getElementById('mob').classList.remove('open')"><span>05</span>Contact</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <img class="hero__bg" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=2000&q=80" alt="Construction site at golden hour">
+  <div class="hero__scrim"></div>
+  <div class="hero__inner">
+    <div class="hero__kicker">General Contracting · Design-Build · Renovation</div>
+    <h1 class="hero__h1">We build<br>what <em>lasts.</em></h1>
+    <p class="hero__sub">Forgeline Construction Group delivers commercial, residential, and industrial projects — on time, on budget, and built to outlive the warranty.</p>
+    <div class="hero__ctas">
+      <a href="#contact" class="btn btn--yellow">Start your project</a>
+      <a href="#projects" class="btn btn--ghost">See our work</a>
+    </div>
+  </div>
+</header>
+
+<div class="stripe"></div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats__inner">
+    <div class="stat reveal"><div class="stat__num" data-count="240">240+</div><div class="stat__lbl">Projects completed</div></div>
+    <div class="stat reveal"><div class="stat__num" data-count="18">18</div><div class="stat__lbl">Years in business</div></div>
+    <div class="stat reveal"><div class="stat__num" data-count="98">98%</div><div class="stat__lbl">On-time delivery</div></div>
+    <div class="stat reveal"><div class="stat__num" data-count="0">0</div><div class="stat__lbl">Lost-time incidents, 5 yrs</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="label reveal">What we do</div>
+        <h2 class="section-h2 reveal">Full-service.<br><em>Ground up.</em></h2>
+      </div>
+      <p class="section-intro reveal">From the first survey to the final walkthrough, one team owns your project. No subcontractor roulette, no surprises in the change orders.</p>
+    </div>
+    <div class="services__grid">
+      <div class="svc reveal">
+        <div class="svc__num">01</div>
+        <h3 class="svc__title">General Contracting</h3>
+        <p class="svc__desc">Complete project execution with a single point of accountability. Scheduling, procurement, site management, and quality control handled end-to-end.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="svc__num">02</div>
+        <h3 class="svc__title">Design-Build</h3>
+        <p class="svc__desc">Architecture and construction under one roof. Faster timelines, tighter budgets, and zero finger-pointing between designer and builder.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="svc__num">03</div>
+        <h3 class="svc__title">Commercial Construction</h3>
+        <p class="svc__desc">Offices, retail, hospitality, and mixed-use developments delivered with minimal disruption to your business operations.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="svc__num">04</div>
+        <h3 class="svc__title">Residential Builds</h3>
+        <p class="svc__desc">Custom homes and multi-unit residential projects built with the craftsmanship your family — or your tenants — will live with for decades.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="svc__num">05</div>
+        <h3 class="svc__title">Renovation &amp; Retrofit</h3>
+        <p class="svc__desc">Structural upgrades, modernizations, and adaptive reuse. We work in occupied buildings without bringing your operations to a halt.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="svc__num">06</div>
+        <h3 class="svc__title">Industrial &amp; Civil</h3>
+        <p class="svc__desc">Warehouses, light manufacturing, and site infrastructure. Engineered for load, compliance, and the long haul.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="label reveal">Selected work</div>
+        <h2 class="section-h2 reveal">Proof, poured<br>in <em>concrete.</em></h2>
+      </div>
+      <p class="section-intro reveal">A selection of recent deliveries across commercial, residential, and industrial sectors. Every project finished on schedule.</p>
+    </div>
+    <div class="projects__grid">
+      <div class="proj proj--lg reveal">
+        <img class="proj__img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80" alt="Meridian Tower commercial office building">
+        <div class="proj__overlay">
+          <div class="proj__tag">Commercial</div>
+          <div class="proj__title">Meridian Tower</div>
+          <div class="proj__meta">12-storey office development · 28,000 m² · Completed 2025</div>
+        </div>
+      </div>
+      <div class="proj proj--sm reveal">
+        <img class="proj__img" src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=1200&q=80" alt="Hillcrest custom residence">
+        <div class="proj__overlay">
+          <div class="proj__tag">Residential</div>
+          <div class="proj__title">Hillcrest Residence</div>
+          <div class="proj__meta">Custom design-build home · Completed 2025</div>
+        </div>
+      </div>
+      <div class="proj proj--sm reveal">
+        <img class="proj__img" src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80" alt="Northgate logistics hub">
+        <div class="proj__overlay">
+          <div class="proj__tag">Industrial</div>
+          <div class="proj__title">Northgate Logistics Hub</div>
+          <div class="proj__meta">42,000 m² warehouse &amp; office · Completed 2024</div>
+        </div>
+      </div>
+      <div class="proj proj--lg reveal">
+        <img class="proj__img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&q=80" alt="Atrium Plaza renovation">
+        <div class="proj__overlay">
+          <div class="proj__tag">Renovation</div>
+          <div class="proj__title">Atrium Plaza Retrofit</div>
+          <div class="proj__meta">Occupied-building modernization · Completed 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="label reveal">How we work</div>
+    <h2 class="section-h2 reveal" style="margin-bottom:3rem;">Four steps.<br><em>Zero chaos.</em></h2>
+    <div class="process__grid">
+      <div class="step reveal">
+        <div class="step__num">01</div>
+        <h3 class="step__title">Consult</h3>
+        <p class="step__desc">We listen first. Site visit, feasibility review, and a straight answer on budget and timeline — before you commit to anything.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step__num">02</div>
+        <h3 class="step__title">Plan</h3>
+        <p class="step__desc">Detailed scope, fixed milestones, and transparent pricing. Permits and engineering handled by our in-house team.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step__num">03</div>
+        <h3 class="step__title">Build</h3>
+        <p class="step__desc">Weekly progress reports with photos. A dedicated site manager you can call. Safety protocols audited monthly.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step__num">04</div>
+        <h3 class="step__title">Deliver</h3>
+        <p class="step__desc">Final walkthrough, snag-free handover, and a 24-month workmanship warranty we actually answer the phone for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US BAND -->
+<section class="band" id="about">
+  <img class="band__bg" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=2000&q=80" alt="Construction workers on steel beams">
+  <div class="band__scrim"></div>
+  <div class="band__inner">
+    <div>
+      <div class="label reveal">Why Forgeline</div>
+      <h2 class="band__h2 reveal">The contractor your <em>last contractor</em> warned you about.</h2>
+    </div>
+    <div class="checks">
+      <div class="check reveal">
+        <div class="check__mark">✓</div>
+        <div>
+          <div class="check__title">Fixed-price contracts that stay fixed</div>
+          <div class="check__desc">Change orders only when you change the scope — never to patch our estimates.</div>
+        </div>
+      </div>
+      <div class="check reveal">
+        <div class="check__mark">✓</div>
+        <div>
+          <div class="check__title">Licensed, bonded &amp; fully insured</div>
+          <div class="check__desc">Full liability coverage and certified crews on every site, every day.</div>
+        </div>
+      </div>
+      <div class="check reveal">
+        <div class="check__mark">✓</div>
+        <div>
+          <div class="check__title">Safety-first culture</div>
+          <div class="check__desc">Zero lost-time incidents in five years. Monthly third-party safety audits.</div>
+        </div>
+      </div>
+      <div class="check reveal">
+        <div class="check__mark">✓</div>
+        <div>
+          <div class="check__title">One call, one team</div>
+          <div class="check__desc">Your site manager answers the phone. No call centers, no run-around.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="wrap">
+    <div class="label reveal">Client words</div>
+    <h2 class="section-h2 reveal" style="margin-bottom:3rem;">Don't take<br><em>our word.</em></h2>
+    <div class="testi__grid">
+      <div class="quote-card reveal">
+        <div class="quote-card__mark">"</div>
+        <p class="quote-card__text">Forgeline delivered our 12-storey development two weeks early. In thirty years of property development, that's a first.</p>
+        <div class="quote-card__attr"><strong>Daniel Reeves</strong>Development Director, Meridian Group</div>
+      </div>
+      <div class="quote-card reveal">
+        <div class="quote-card__mark">"</div>
+        <p class="quote-card__text">They renovated our offices while 200 staff kept working. We barely noticed they were there — until we saw the result.</p>
+        <div class="quote-card__attr"><strong>Sarah Okafor</strong>COO, Atrium Holdings</div>
+      </div>
+      <div class="quote-card reveal">
+        <div class="quote-card__mark">"</div>
+        <p class="quote-card__text">The weekly photo reports and honest budget tracking made this the least stressful build we've ever commissioned.</p>
+        <div class="quote-card__attr"><strong>Marcus Webb</strong>Facilities Lead, Northgate Logistics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact__inner">
+    <div>
+      <div class="label reveal">Get a quote</div>
+      <h2 class="contact__h2 reveal">Let's break<br><em>ground.</em></h2>
+      <p class="contact__sub reveal">Tell us about your project and we'll come back within one business day with a feasibility assessment and ballpark figure.</p>
+      <div class="contact__detail reveal">
+        <div class="contact__detail-lbl">Call us</div>
+        <a href="tel:+1234567890" class="contact__detail-val">+1 (234) 567-890</a>
+      </div>
+      <div class="contact__detail reveal">
+        <div class="contact__detail-lbl">Email</div>
+        <a href="mailto:build@forgeline.example" class="contact__detail-val">build@forgeline.example</a>
+      </div>
+      <div class="contact__detail reveal">
+        <div class="contact__detail-lbl">Office</div>
+        <div class="contact__detail-val">1400 Industry Ave, Suite 200</div>
+      </div>
+    </div>
+    <form class="form reveal" onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('ok').style.display='block';">
+      <div class="form-row">
+        <div class="fg"><label class="fl">Name *</label><input class="fi" type="text" required placeholder="Your name"></div>
+        <div class="fg"><label class="fl">Company</label><input class="fi" type="text" placeholder="Company name"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label class="fl">Email *</label><input class="fi" type="email" required placeholder="you@company.com"></div>
+        <div class="fg"><label class="fl">Phone</label><input class="fi" type="tel" placeholder="+1 ..."></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Project type</label>
+        <select class="fi">
+          <option value="" disabled selected>Select project type</option>
+          <option>Commercial construction</option>
+          <option>Residential build</option>
+          <option>Renovation / retrofit</option>
+          <option>Industrial / civil</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Project details</label><textarea class="fi" placeholder="Location, size, timeline, budget range..."></textarea></div>
+      <button type="submit" class="form-submit">Request a quote →</button>
+    </form>
+    <div class="form-success" id="ok">
+      <div class="form-success__title">Request received.</div>
+      <p class="form-success__sub">We'll be in touch within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">FORGE<span>LINE</span></div>
+      <p class="footer__tag">Commercial, residential, and industrial construction. We build what lasts.</p>
+    </div>
+    <div>
+      <div class="footer__head">Navigate</div>
+      <a href="#services" class="footer__lnk">Services</a>
+      <a href="#projects" class="footer__lnk">Projects</a>
+      <a href="#process" class="footer__lnk">Process</a>
+      <a href="#contact" class="footer__lnk">Contact</a>
+    </div>
+    <div>
+      <div class="footer__head">Contact</div>
+      <a href="tel:+1234567890" class="footer__lnk">+1 (234) 567-890</a>
+      <a href="mailto:build@forgeline.example" class="footer__lnk">build@forgeline.example</a>
+      <span class="footer__lnk">Mon–Fri, 7:00–18:00</span>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span class="footer__copy">© 2026 Forgeline Construction Group. Demo concept — all content placeholder.</span>
+    <span class="footer__copy">Licensed · Bonded · Insured</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  var counts = new Map();
+  els.forEach(function (el) {
+    var p = el.parentElement, n = counts.get(p) || 0;
+    counts.set(p, n + 1);
+    el.style.setProperty('--rd', Math.min(n * 0.08, 0.4) + 's');
+  });
+  if (reduced || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  }
+  // count-up stats
+  var nums = document.querySelectorAll('.stat__num');
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target; io2.unobserve(el);
+        var m = el.textContent.trim().match(/^(\d+)(.*)$/);
+        if (!m) return;
+        var target = +m[1], suffix = m[2], t0 = null, dur = 1500;
+        function tick(t) {
+          if (t0 === null) t0 = t;
+          var k = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - k, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (k < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { io2.observe(n); });
+  }
+})();
+</script>
+</body>
+</html>
